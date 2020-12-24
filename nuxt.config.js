@@ -40,6 +40,10 @@ export default {
   build: {
   },
 
+  generate: {
+    fallback: true
+  },
+
   env: {
     GRAPH_TOKEN: process.env.GRAPH_TOKEN,
     MAP_BOX_TOKEN: process.env.MAP_BOX_TOKEN,
