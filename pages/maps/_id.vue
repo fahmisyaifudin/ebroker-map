@@ -39,7 +39,7 @@ export default {
     );
     let data = await response.json();
     this.route = data.data.rute.map((value) => {
-      return [parseFloat(value.latitude), parseFloat(value.longitude)];
+      return [parseFloat(value.longitude), parseFloat(value.latitude)];
     });
 
     let res_graph = await fetch(
