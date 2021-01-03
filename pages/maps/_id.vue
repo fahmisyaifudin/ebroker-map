@@ -15,6 +15,7 @@ export default {
   data() {
     return {
       route: null,
+      routeDetail: [],
       graph: null,
     };
   },
@@ -39,6 +40,7 @@ export default {
     );
     let data = await response.json();
     this.route = data.data.rute.map((value) => {
+      this.routeDetail.push(value);
       return [parseFloat(value.longitude), parseFloat(value.latitude)];
     });
 
@@ -73,8 +75,11 @@ export default {
         zoom: 10,
       });
 
-      this.route.forEach((value) => {
-        new mapboxgl.Marker().setLngLat(value).addTo(mapbox);
+      this.route.forEach((value, index) => {
+        let popup = new mapboxgl.Popup({ offset: 25 }).setText(
+            'Pick ' + this.routeDetail[index].kg_pick + ' Kg ' + 'dialamat ' + this.routeDetail[index].alamat
+        );
+        new mapboxgl.Marker().setLngLat(value).setPopup(popup).addTo(mapbox);
       });
 
       mapbox.on("load", function () {
@@ -107,7 +112,7 @@ export default {
 
 <style scoped>
 #map {
-  width: 360px;
+  width: 375px;
   height: 740px;
 }
 </style>
